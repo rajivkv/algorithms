@@ -6,8 +6,6 @@ public class Conversion {
 
 	
 	public  Node treeLeavesToList(Node root){
-		
-		
 		if(root==null)
 			return null;
 		

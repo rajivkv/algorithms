@@ -33,7 +33,7 @@ public class RodCut {
 		for(int i=1;i<=maxKnapCost;i++){
 			for(int j = 0; j <knapCost.length;j++){
 				if(i-knapCost[j] >= 0){
-					tCost[i] = Math.max(tCost[i-1], knapValue[j]+tCost[i-knapCost[j]]);
+					tCost[i] = Math.max(tCost[i], knapValue[j]+tCost[i-knapCost[j]]);
 				}
 			}
 		}
