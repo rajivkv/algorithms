@@ -67,7 +67,7 @@ public class Sum {
 	
 	//no repitition
 	public int knapSack1(int size[], int value[], int capacity, int index){
-		if(capacity<0){
+		if(capacity<0 || index<0){
 			return 0;
 		}
 		int max = 0;
@@ -75,4 +75,55 @@ public class Sum {
 
 		return max;
 	}
+	
+	//closest to sum
+	public boolean subSequenceSum(int arr[] , int sum, int index){
+		
+		if(sum<0 || index<0){
+			return false;
+		}
+		
+		if(sum==0){
+			return true;
+		}
+		if(index==0 && arr[index]==sum){
+			return true;
+		}
+		return subSequenceSum(arr, sum, index-1) || subSequenceSum(arr, sum, index-1);
+		
+	}
+	
+	public void subSequenceSum1(int arr[] , int sum){
+		boolean sumArr[][] = new boolean[arr.length+1][sum+1];
+		
+		for(int i = 0 ; i<=sumArr.length;i++){
+			sumArr[i][0] = true;
+		}
+
+		for(int i = 1 ; i<=sumArr.length;i++){
+			
+			for(int j=1;j<=sum;j++){
+				if(sum-arr[i-1] ==0){
+					sumArr[i][j] = true;
+				}else if (sum-arr[i-1] >=0){
+					sumArr[i][j] = sumArr[i-1][j] | sumArr[i-1][sum-arr[i-1]];
+				}else{
+					sumArr[i][j] = sumArr[i-1][j];
+				}
+			}
+			
+		}
+		for(int i=0;i<sum;i++){
+			System.out.println(i+" "+ sumArr[arr.length][i]);
+		}
+		
+		
+	}
+	public static void main(String[] args) {
+		
+		Sum ss = new Sum();
+		ss.subSequenceSum1(new int[]{2, 6, 7,10},9);
+		
+	}
+	
 }
