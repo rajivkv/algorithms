@@ -1,4 +1,4 @@
-package dynamicProgramming;
+package dynamicprog;
 
 public class Sum {
 
@@ -96,17 +96,17 @@ public class Sum {
 	public void subSequenceSum1(int arr[] , int sum){
 		boolean sumArr[][] = new boolean[arr.length+1][sum+1];
 		
-		for(int i = 0 ; i<=sumArr.length;i++){
+		for(int i = 0 ; i<sumArr.length;i++){
 			sumArr[i][0] = true;
 		}
 
-		for(int i = 1 ; i<=sumArr.length;i++){
+		for(int i = 1 ; i<sumArr.length;i++){
 			
 			for(int j=1;j<=sum;j++){
-				if(sum-arr[i-1] ==0){
+				if(j-arr[i-1] ==0){
 					sumArr[i][j] = true;
-				}else if (sum-arr[i-1] >=0){
-					sumArr[i][j] = sumArr[i-1][j] | sumArr[i-1][sum-arr[i-1]];
+				}else if (j-arr[i-1] >=0){
+					sumArr[i][j] = sumArr[i-1][j] | sumArr[i-1][j-arr[i-1]];
 				}else{
 					sumArr[i][j] = sumArr[i-1][j];
 				}
