@@ -34,7 +34,7 @@ public class BinarySearchTree {
 				size += sizeMap.get(root.left);
 			}
 		}
-		if (root.right != null) {
+		if (root.right != null && isBst) {
 			isBst = minMap.get(root.right) >= root.data ? true : false;
 			if (isBst) {
 				max = maxMap.get(root.right);

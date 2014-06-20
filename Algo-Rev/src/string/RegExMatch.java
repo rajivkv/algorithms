@@ -6,9 +6,36 @@ public class RegExMatch {
 	//length of longest substring without repetition
 	//suffix array
 	//lcp of suffix array
-	
+	//interleaved string
 	//palindrome usig suffix array
 	//palindrome using dp
+	
+	//partition problem -> subsets
+	public int lengthLongestWithoutRep(String str){
+		
+		int[] length = new int[str.length()];
+		
+		int bfound[]=new int[256];
+		
+		for(int i=0;i<bfound.length;i++){
+			bfound[i]=-1;
+		}
+		length[0] =1;
+		for(int i=1;i<str.length();i++){
+			if(bfound[str.charAt(i)]!=-1 && (i-length[i-1])<=bfound[str.charAt(i)]){
+				length[i] = i-bfound[str.charAt(i)];
+			}else{
+				length[i]=length[i-1]+1;
+			}
+			bfound[str.charAt(i)] = i;
+		}
+		int max = 0;
+		for(int i=0;i<length.length;i++){
+			max = Math.max(length[i], max);
+		}
+		return max;
+	}
+	
 	
 	//interleaving of strings
 	public static boolean matches(String s1, String s2){
