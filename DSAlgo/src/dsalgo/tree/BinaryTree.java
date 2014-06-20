@@ -33,6 +33,7 @@ public class BinaryTree {
 	}
 	
 	//inorder traversal
+	//takes nlogn time
 	public Node treeToList(Node root){
 		if(root==null){
 			return null;
@@ -51,14 +52,33 @@ public class BinaryTree {
 			}
 			current.left = ltRight;
 			ltRight.right = current;
+			left.left = right;
 		}
 
 		if(right!=null){
 			current.right = right;
 			right.left = current;
+			right.right=left;
 		}
 		
 		return left!=null ? left:current;
 	}
 	
+	  Node head =null;
+	  //in inorder u donot need left node
+	   public void treeToList1(Node root){
+	        if(root==null){
+	            return;
+	        }
+	        treeToList1(root.left);
+	        //list.add(root);
+	        
+	        if(head==null){
+	          head = root;
+	        }else{
+	         head.left = root; 
+	        }
+	        treeToList1(root.right);
+	    }
+	    
 }

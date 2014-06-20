@@ -27,9 +27,11 @@ public class SlidingWindow {
 		}
 		for(int i=width;i<input.length;i++){
 			minArray[i-width]=queue.get(0);
+			//remove min
 			if(queue.get(0)==input[i-width]){
 				queue.removeFirst();
 			}
+			//insert
 			for(int j=queue.size()-1;j>=0;j--){
 				if(input[i]<queue.get(j)){
 					queue.removeLast();

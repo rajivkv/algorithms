@@ -73,6 +73,7 @@ public class Expressions {
 				case '*':
 				case '/':					
 					{
+					  //innernodes
 						Node p2 = operands.pop();
 						Node p1 = operands.pop();
 						Node p = new Node(c);
@@ -84,6 +85,7 @@ public class Expressions {
 					}
 				default:
 					if(c>='0' && c<='9'){
+					  //leaf nodes
 						operands.push(new Node(c));
 					}
 			}

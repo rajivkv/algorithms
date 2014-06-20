@@ -89,7 +89,7 @@ public class Sum {
 		if(index==0 && arr[index]==sum){
 			return true;
 		}
-		return subSequenceSum(arr, sum, index-1) || subSequenceSum(arr, sum, index-1);
+		return subSequenceSum(arr, sum-arr[index], index-1) || subSequenceSum(arr, sum, index-1);
 		
 	}
 	
