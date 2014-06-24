@@ -2,6 +2,70 @@ package string;
 
 public class RegExMatch {
 
+	public boolean isInterLeaved(String s1, String s2, String s3){
+		
+		int i =0;
+		int j=0;
+		int k=0;
+		while(k<s3.length()){
+			if(i<s1.length() && s3.charAt(k)==s1.charAt(i)){
+				i++;
+			}else if(j<s2.length() && s3.charAt(k)==s2.charAt(j)){
+				j++;
+			}else{
+				return false;
+			}
+			k++;
+		}
+		return true;
+	}
+	public boolean isInterLeaved_NotUnique(String s1, String s2, String s3){
+		
+		int i =0;
+		int j=0;
+		int k=0;
+		while(k<s3.length()){
+			boolean isduplicate = false;
+			boolean isMatch = false;
+			if(i<s1.length() && s3.charAt(k)==s1.charAt(i)){
+				isduplicate=true;
+				i++;
+				isMatch=true;
+			}
+			if(j<s2.length() && s3.charAt(k)==s2.charAt(j)){
+				j++;
+				if(isduplicate){
+					return isInterLeaved_NotUnique(s1.substring(i-1),s2.substring(j),s3.substring(k+1))
+					 || isInterLeaved_NotUnique(s1.substring(i),s2.substring(j-1),s3.substring(k+1));
+				}
+				isMatch=true;
+			}
+			k++;
+			if(!isMatch)
+				return false;
+		}
+		return true;
+	}
+	public int closestSubArraySum(int array[], int sum){
+		//negative numbers http://stackoverflow.com/questions/5534063/zero-sum-subarray
+		int stIndex=0;
+		int currSum=0;
+		for(int i =0;i<array.length;i++){
+			currSum = currSum+array[i];
+			if(currSum>sum){
+				while(currSum>sum && stIndex<=i){
+					currSum = currSum-array[stIndex++];
+				}
+			}
+			if(currSum==sum){
+				break;
+			}
+		}
+		
+		return stIndex;
+	}
+	
+	
 	//sort
 	//length of longest substring without repetition
 	//suffix array
@@ -85,6 +149,20 @@ public class RegExMatch {
 		String s1 = "abc*";
 		String s2 = "abccccccccccccccc";
 		System.out.println(matches(s1,s2));
+		
+		
+		{
+			
+			String s11="abcd";
+			String s21="aefgh";
+			String s31="aaefghbcd";
+			
+			RegExMatch match = new RegExMatch();
+			System.out.println(match.isInterLeaved(s11, s21, s31));
+			System.out.println(match.isInterLeaved_NotUnique(s11, s21, s31));
+
+			System.out.println(match.closestSubArraySum(new int[]{3,12,45,1,56,223,12},46));
+		}
 	}
 	
 }

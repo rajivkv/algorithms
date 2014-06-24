@@ -30,14 +30,17 @@ public class RodCut {
 		int tCost[] = new int[maxKnapCost+1];
 		tCost[0] = 0;
 		
+		int max = 0;
 		for(int i=1;i<=maxKnapCost;i++){
 			for(int j = 0; j <knapCost.length;j++){
 				if(i-knapCost[j] >= 0){
 					tCost[i] = Math.max(tCost[i], knapValue[j]+tCost[i-knapCost[j]]);
 				}
+				max = Math.max(tCost[i], max);
 			}
 		}
-		return tCost[maxKnapCost];	
+		return tCost[maxKnapCost];
+		//is tcost[] ? increasing
 	}
 	
 	//knapsack with repetition not allowed
@@ -69,6 +72,7 @@ public class RodCut {
 		for(int i=2;i<=maxPart[1].length;i++){
 			maxPart[1][i] = maxPart[1][i-1] + partition[i];	
 		}
+		//partition into i partition's for subset ending at j
 		for(int i=2; i<=noPartitions; i++){
 			for(int j=1; j <=partition.length; j++){
 					for(int j1=1;j1<=j;j1++){

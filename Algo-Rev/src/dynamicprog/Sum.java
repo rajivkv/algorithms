@@ -119,6 +119,35 @@ public class Sum {
 		
 		
 	}
+	
+	int [][] matrix ={
+				{1,-4,5},
+				{-3,6,7},
+				{-12,23,4}
+			};
+	public void matrixSum(){
+		int maxSum=0;
+		int rows = matrix.length;
+		int columns = matrix[0].length;
+		for(int startx=0;startx<rows;startx++)
+			for(int starty=0;starty<columns;starty++){
+				
+				int rowwise[] = new int[columns];
+				for(int endx=startx;endx<rows;endx++){
+					for(int endy=starty; endy<columns;endy++){
+						int sum =0;
+						for(int k1=startx;k1<=endx;k1++){
+							for(int k2=starty;k2<=endy;k2++){
+								sum = sum+matrix[k1][k2];
+							}
+							maxSum=Math.max(maxSum, sum);
+						}
+					}
+				}
+		}
+		
+	}
+	
 	public static void main(String[] args) {
 		
 		Sum ss = new Sum();
